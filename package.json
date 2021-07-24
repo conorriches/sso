@@ -1,0 +1,21 @@
+{
+  "name": "hacman-single-sign-on",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-auth": "npx functions-framework --port=8081 --target=helloWorld --signature-type=http --source=./sso-auth",
+    "start-sso": "npx functions-framework --post=8080 --target=helloWorld --signature-type=http --source=./sso",
+    "start": "npm run start-auth && npm run start-sso"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discourse-sso": "^1.0.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^1.9.0"
+  }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1E8C99">
+    <title>Login | Hackspace Manchester SSO</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,100' rel='stylesheet' type='text/css'>
+    <link href="https://members.hacman.org.uk/css/main.css" rel="stylesheet">
+</head>
+<body class="register_login">
+    <style>
+        body.register_login {
+            background: black;
+        }
+        header:first-of-type {
+            background: rgb(255,255,255);
+            background: linear-gradient(90deg, rgba(255,255,255) 50%, rgba(255,255,0) 90%);
+        }
+        header:nth-of-type(2) {
+            background: rgb(205,205,255);
+            background: linear-gradient(90deg, rgba(255,255,255) 30%, #EFD4F7 90%);
+        }
+        header h1 {
+            font-weight: bold;
+            color: black;
+            letter-spacing: 10px;
+           
+        }
+        .sidenav-brand{
+            height: auto;
+            align-items: center;
+        }
+        #bodyWrap{
+            padding:0;
+        }
+        .background-image{
+            background: url('https://members.hacman.org.uk/img/rule-zero.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(10px);
+        }
+    </style>
+    <div class="background-image"></div>
+    <header>
+        <span class="sidenav-brand" style="display:flex; justify-content:space-between">
+            <a href="https://members.hacman.org.uk"><img class="" src="https://members.hacman.org.uk/img/logo-new.png" height="100" /></a>
+            <h1>SSO</h1>
+        </span>
+    </header>
+    <header>
+        <span class="sidenav-brand" style="display:flex; justify-content:space-between">
+            <h4> 🔒 You are logging in to a Hackspace Manchester service.</h4>
+        </span>
+    </header>
+   
+<div id="bodyWrap">
+    <div class="container-fluid">
+        <div class="login-container col-xs-12 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+            <!-- TODO get this URL sorted - sso.hacman.org.uk? -->
+            <form id="loginForm" method="GET" action="https://europe-west2-single-sign-on-320713.cloudfunctions.net/sso-auth" accept-charset="UTF-8">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>Login</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" placeholder="Email" name="email" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <input class="btn btn-primary btn-block" type="submit" value="Login">
+                    </div>
+                </div>
+                <div class="row bottom-links">
+                    <div class="col-xs-12">
+                        <a href="https://members.hacman.org.uk/password/forgotten">Reset your password</a> |
+                        <a href="https://members.hacman.org.uk/register">Become a member</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var params = new URLSearchParams(document.location.search);
+    var sso = params.get("sso");
+    var sig = params.get("sig");
+
+    const createHiddenInput = function(name, value){
+        var input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", name);
+        input.setAttribute("value", value);
+        return input;
+    }
+    
+    document.getElementById("loginForm").appendChild(createHiddenInput('sso', sso));
+    document.getElementById("loginForm").appendChild(createHiddenInput('sig', sig));
+</script>
+</body>
+</html>
