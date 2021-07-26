@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "discourse-sso": "^1.0.5",
     "express": "^4.17.1"
   },
